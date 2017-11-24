@@ -1,6 +1,6 @@
 # ReasonReact Starter
 
-> A starter for building universal web apps with ReactReason.
+> A starter for building universal web apps with ReasonReact.
 
 ## Features
 
