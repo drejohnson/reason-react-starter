@@ -13,7 +13,7 @@
 /lib
 /types
 .merlin
-bsb.lock
+.bsb.lock
 *.bs.js
 
 # misc

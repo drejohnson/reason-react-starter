@@ -15,3 +15,7 @@ type element;
 [@bs.val] external hot : bool = "module.hot";
 
 [@bs.val] external accept : unit => unit = "module.hot.accept";
+
+[@bs.get_index] external gett : ('a, string) => Js.Json.t = "";
+
+let geturl = (req) => gett(req, "url");
