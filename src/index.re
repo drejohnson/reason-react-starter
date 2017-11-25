@@ -1,3 +1,5 @@
+open ReactRouter;
+
 [@bs.val] [@bs.module "react-dom"] external hydrate : (ReasonReact.reactElement, 'a) => unit =
   "hydrate";
 
@@ -11,9 +13,14 @@ module AppContainer = {
 
 let rootId = Utils.get_by_id(Utils.dom, "root");
 
-let app = Utils.isPROD ? <Root /> : <AppContainer> <Root /> </AppContainer>;
+let app = () =>
+  Utils.isPROD ?
+    <BrowserRouter> <Root /> </BrowserRouter> :
+    <AppContainer> <BrowserRouter> <Root /> </BrowserRouter> </AppContainer>;
 
-let _ = hydrate(app, rootId);
+let render = (component) => hydrate(component(), rootId);
+
+render(app);
 
 if (Utils.hot) {
   Utils.accept()

@@ -1,5 +1,7 @@
 open Express;
 
+open ReactRouter;
+
 type compiler;
 
 [@bs.module] external webpack : Js.Json.t => compiler = "webpack";
@@ -8,9 +10,9 @@ type compiler;
 
 let app = express();
 
-App.use(app, Webpack.webpackDevMiddleware);
+! Utils.isPROD ? App.use(app, Webpack.webpackDevMiddleware) : ();
 
-App.use(app, Webpack.webpackHotMiddleware);
+! Utils.isPROD ? App.use(app, Webpack.webpackHotMiddleware) : ();
 
 let renderView = (html, app_bundle, vendor_bundle) => {j|
   <html lang="en">
@@ -33,6 +35,19 @@ let renderView = (html, app_bundle, vendor_bundle) => {j|
   </html>
 |j};
 
+let renderMiddleware =
+  Middleware.from(
+    (_req, res, _next) => {
+      let context = Js_json.object_ @@ Js_dict.empty();
+      let location = Utils.geturl(_req);
+      let html =
+        ReactDOMServerRe.renderToString(<ServerRouter context location> <Root /> </ServerRouter>);
+      let app_bundle = [%bs.raw {|APP_BUNDLE|}];
+      let vendor_bundle = [%bs.raw {|VENDOR_BUNDLE|}];
+      Response.sendString(res, renderView(html, app_bundle, vendor_bundle))
+    }
+  );
+
 App.useOnPath(
   app,
   ~path="/",
@@ -46,19 +61,7 @@ App.useOnPath(
   |> Express.Static.asMiddleware
 );
 
-App.get(
-  app,
-  ~path="/",
-  Middleware.from(
-    (_req, res, _next) => {
-      /* We can server render a React app here and send it to the client! */
-      let html = ReactDOMServerRe.renderToString(<Root />);
-      let app_bundle = [%bs.raw {|APP_BUNDLE|}];
-      let vendor_bundle = [%bs.raw {|VENDOR_BUNDLE|}];
-      Response.sendString(res, renderView(html, app_bundle, vendor_bundle))
-    }
-  )
-);
+App.get(app, ~path="*", renderMiddleware);
 
 [@bs.val] external processEnvPort : string = "process.env.PORT";
 
