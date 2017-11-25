@@ -13,10 +13,22 @@ module AppContainer = {
 
 let rootId = Utils.get_by_id(Utils.dom, "root");
 
+/* Using contents of Root component as a work around to get routing to work client side */
 let app = () =>
   Utils.isPROD ?
     <BrowserRouter> <Root /> </BrowserRouter> :
-    <AppContainer> <BrowserRouter> <Root /> </BrowserRouter> </AppContainer>;
+    <AppContainer>
+      <BrowserRouter>
+        <div>
+          <Header />
+          <Switch>
+            <Route path="/" exact=true component=(() => <Home />) />
+            <Route path="/about" exact=true component=(() => <About />) />
+            <Route component=(() => <NotFound />) />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </AppContainer>;
 
 let render = (component) => hydrate(component(), rootId);
 
