@@ -6,8 +6,8 @@ type compiler;
 
 [@bs.module] external hotMiddleware : (compiler, Js.t({..})) => 'a = "webpack-hot-middleware";
 
-[@bs.module] external config : Js.Json.t =
-  "/home/dre/workspaces/PHRESHR/reason-react-ssr/webpack.config.js";
+/* TODO: fix */
+[@bs.module] external config : Js.Json.t = "/your/absolute/path/webpack.config.js";
 
 let compiler = webpack(config);
 
