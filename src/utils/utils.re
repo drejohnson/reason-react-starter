@@ -19,3 +19,6 @@ type element;
 [@bs.get_index] external gett : ('a, string) => Js.Json.t = "";
 
 let geturl = (req) => gett(req, "url");
+
+let thenResolve = (fn) => Js.Promise.then_((value) => Js.Promise.resolve(fn(value)));
+/* Js.Promise.(resolve(1) |> thenResolve((value) => value + 1) |> thenResolve(Js.log)); */
