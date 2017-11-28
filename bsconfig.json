@@ -9,6 +9,7 @@
   },
   "bs-dependencies": [
     "reason-react",
+    "bs-react-fela",
     "bs-express"
   ],
   "package-specs": [{

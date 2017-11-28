@@ -6,6 +6,7 @@ let make = (~message, _children) => {
   ...component,
   render: (_self) =>
     <View>
+      <ThemedText> "I am blue and 15px sized" </ThemedText>
       <Image
         source="https://fakeimg.pl/1600x350/?retina=true"
         resizeMode=Cover

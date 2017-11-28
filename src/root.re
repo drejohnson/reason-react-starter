@@ -13,6 +13,7 @@ let make = (_children) => {
   render: (_self) =>
     <div>
       <Header />
+      <ThemedText> "I am blue and 15px sized" </ThemedText>
       <Switch>
         <Route path="/" exact=true component=renderHome />
         <Route path="/about" exact=true component=renderAbout />

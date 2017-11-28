@@ -14,37 +14,25 @@ let app = express();
 
 ! Utils.isPROD ? App.use(app, Webpack.webpackHotMiddleware) : ();
 
-let renderView = (html, app_bundle, vendor_bundle) => {j|
-  <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="theme-color" content="#000000">
-      <link rel="manifest" href="/manifest.json">
-      <link rel="shortcut icon" href="/favicon.ico">
-      <title>ReasonReact Starter</title>
-    </head>
-    <body>
-      <noscript>
-        You need to enable JavaScript to run this app.
-      </noscript>
-      <div id="root">$(html)</div>
-      <script src=$(vendor_bundle)></script>
-      <script src=$(app_bundle)></script>
-    </body>
-  </html>
-|j};
-
 let renderMiddleware =
   Middleware.from(
     (_req, res, _next) => {
+      let renderer = FelaRenderer.renderer;
+      let styleMarkup = Fela.renderToMarkup(renderer);
       let context = Js_json.object_ @@ Js_dict.empty();
       let location = Utils.geturl(_req);
       let html =
-        ReactDOMServerRe.renderToString(<ServerRouter context location> <Root /> </ServerRouter>);
+        ReactDOMServerRe.renderToString(
+          <Fela.Provider renderer>
+            <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
+              ...<ServerRouter context location> <Root /> </ServerRouter>
+            </Fela.ThemeProvider>
+          </Fela.Provider>
+        );
+      let styles = styleMarkup;
       let app_bundle = [%bs.raw {|APP_BUNDLE|}];
       let vendor_bundle = [%bs.raw {|VENDOR_BUNDLE|}];
-      Response.sendString(res, renderView(html, app_bundle, vendor_bundle))
+      Response.sendString(res, Render.view(html, styles, app_bundle, vendor_bundle))
     }
   );
 

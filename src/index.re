@@ -13,30 +13,40 @@ module AppContainer = {
 
 let rootId = Utils.get_by_id(Utils.dom, "root");
 
+let renderer = FelaRenderer.renderer;
+
 /* Using contents of Root component as a work around to get routing to work client side */
 let app = () =>
   Utils.isPROD ?
-    <BrowserRouter>
-      <div>
-        <Header />
-        <Switch>
-          <Route path="/" exact=true component=(() => <Home />) />
-          <Route path="/about" exact=true component=(() => <About />) />
-          <Route component=(() => <NotFound />) />
-        </Switch>
-      </div>
-    </BrowserRouter> :
+    <Fela.Provider renderer>
+      <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
+        ...<BrowserRouter>
+             <div>
+               <Header />
+               <Switch>
+                 <Route path="/" exact=true component=(() => <Home />) />
+                 <Route path="/about" exact=true component=(() => <About />) />
+                 <Route component=(() => <NotFound />) />
+               </Switch>
+             </div>
+           </BrowserRouter>
+      </Fela.ThemeProvider>
+    </Fela.Provider> :
     <AppContainer>
-      <BrowserRouter>
-        <div>
-          <Header />
-          <Switch>
-            <Route path="/" exact=true component=(() => <Home />) />
-            <Route path="/about" exact=true component=(() => <About />) />
-            <Route component=(() => <NotFound />) />
-          </Switch>
-        </div>
-      </BrowserRouter>
+      <Fela.Provider renderer>
+        <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
+          ...<BrowserRouter>
+               <div>
+                 <Header />
+                 <Switch>
+                   <Route path="/" exact=true component=(() => <Home />) />
+                   <Route path="/about" exact=true component=(() => <About />) />
+                   <Route component=(() => <NotFound />) />
+                 </Switch>
+               </div>
+             </BrowserRouter>
+        </Fela.ThemeProvider>
+      </Fela.Provider>
     </AppContainer>;
 
 let render = (component) => hydrate(component(), rootId);

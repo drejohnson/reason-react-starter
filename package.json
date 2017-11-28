@@ -7,27 +7,40 @@
     "build:re": "bsb -make-world",
     "watch:re": "bsb -make-world -w",
     "build:client": "webpack",
+    "watch:client": "webpack -w",
     "build:server": "webpack --config webpack.server.config.js",
     "watch:server": "webpack --config webpack.server.config.js -w",
-    "build": "yarn build:client && yarn build:server",
-    "watch": "bsb -make-world -w",
+    "build": "bsb -make-world && yarn build:client && yarn build:server",
     "start": "node build/server",
-    "predev": "yarn build",
-    "dev": "bsb -make-world -w | node build/server",
+    "predev": "bsb -clean-world | yarn build",
+    "dev": "concurrently \"bsb -make-world -w\" \"node build/server\"",
     "clean": "bsb -clean-world",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack -w",
     "prepare": "npm link bs-platform"
   },
   "dependencies": {
+    "bs-react-fela": "^0.1.0",
     "express": "^4.16.2",
+    "fela": "^6.1.0",
+    "fela-dom": "^7.0.0",
+    "fela-plugin-embedded": "^5.2.1",
+    "fela-plugin-extend": "^6.0.2",
+    "fela-plugin-fallback-value": "^5.0.15",
+    "fela-plugin-lvha": "^5.0.14",
+    "fela-plugin-named-keys": "^1.0.0",
+    "fela-plugin-placeholder-prefixer": "^5.0.15",
+    "fela-plugin-prefixer": "^5.0.15",
+    "fela-plugin-unit": "^5.0.14",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-fela": "^6.1.1",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "bs-express": "0.0.5",
     "clean-webpack-plugin": "^0.1.17",
+    "concurrently": "^3.5.1",
     "copy-webpack-plugin": "^4.2.3",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
@@ -46,6 +59,7 @@
     "webpack-dev-server": "^2.9.4",
     "webpack-hot-middleware": "^2.20.0",
     "webpack-manifest-plugin": "^2.0.0-rc.1",
-    "webpack-node-externals": "^1.6.0"
+    "webpack-node-externals": "^1.6.0",
+    "webpack-rollup-loader": "^0.5.0"
   }
 }
