@@ -12,6 +12,9 @@ type element;
 
 [@bs.send] external get_by_id : (dom, string) => element = "getElementById";
 
+[@bs.send] external get_elements_by_classname : (dom, string) => array(element) =
+  "getElementsByClassName";
+
 [@bs.val] external hot : bool = "module.hot";
 
 [@bs.val] external accept : unit => unit = "module.hot.accept";
