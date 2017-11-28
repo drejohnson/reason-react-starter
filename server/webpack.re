@@ -7,7 +7,9 @@ type compiler;
 [@bs.module] external hotMiddleware : (compiler, Js.t({..})) => 'a = "webpack-hot-middleware";
 
 /* TODO: fix */
-[@bs.module] external config : Js.Json.t = "/your/absolute/path/webpack.config.js";
+[@bs.module] external config : Js.Json.t = "../../../webpack.config";
+
+let config = config;
 
 let compiler = webpack(config);
 
