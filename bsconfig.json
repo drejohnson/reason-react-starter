@@ -24,7 +24,7 @@
         "components",
         "pages",
         "utils",
-        "types"
+        "bindings"
       ]
     },
     "server"
