@@ -2,6 +2,8 @@
 
 > A starter for building universal web apps with ReasonReact.
 
+> Far from refined. Used as a basis to learn ReasonML and POC for server side rendering with ReasonReact
+
 ## Features
 
 * [x] [ReasonReact](https://reasonml.github.io/reason-react/)
