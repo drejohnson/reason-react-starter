@@ -2,18 +2,17 @@ open Express;
 
 open ReactRouter;
 
-type compiler;
-
-[@bs.module] external webpack : Js.Json.t => compiler = "webpack";
-
-[@bs.module "body-parser"] external bodyParserJson : unit => Express.Middleware.t = "json";
-
 let app = express();
 
 ! Utils.isPROD ? App.use(app, Webpack.webpackDevMiddleware) : ();
 
 ! Utils.isPROD ? App.use(app, Webpack.webpackHotMiddleware) : ();
 
+[@bs.val] external app_bundle : string = "APP_BUNDLE";
+
+[@bs.val] external vendor_bundle : string = "VENDOR_BUNDLE";
+
+/* Same as with index.re, using contents of Root component as a work around to get routing to work client side. Issue is with context I believe */
 let renderMiddleware =
   Middleware.from(
     (_req, res, _next) => {
@@ -25,13 +24,20 @@ let renderMiddleware =
         ReactDOMServerRe.renderToString(
           <Fela.Provider renderer>
             <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
-              ...<ServerRouter context location> <Root /> </ServerRouter>
+              ...<ServerRouter context location>
+                   <div>
+                     <Header />
+                     <Switch>
+                       <Route path="/" exact=true component=(() => <Home />) />
+                       <Route path="/about" exact=true component=(() => <About />) />
+                       <Route component=(() => <NotFound />) />
+                     </Switch>
+                   </div>
+                 </ServerRouter>
             </Fela.ThemeProvider>
           </Fela.Provider>
         );
       let styles = styleMarkup;
-      let app_bundle = [%bs.raw {|APP_BUNDLE|}];
-      let vendor_bundle = [%bs.raw {|VENDOR_BUNDLE|}];
       Response.sendString(res, Render.view(html, styles, app_bundle, vendor_bundle))
     }
   );
@@ -55,7 +61,6 @@ App.get(app, ~path="*", renderMiddleware);
 
 let port = int_of_string("8080");
 
-/* Listen for requests :D */
 App.listen(
   app,
   ~port,
