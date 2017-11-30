@@ -15,7 +15,7 @@ let rootId = Utils.get_by_id(Utils.dom, "root");
 
 let renderer = FelaRenderer.renderer;
 
-/* Using contents of Root component as a work around to get routing to work client side */
+/* Using contents of Root component as a work around to get routing to work client side. Issue is with context I believe */
 let app = () =>
   Utils.isPROD ?
     <Fela.Provider renderer>
