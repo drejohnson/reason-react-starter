@@ -141,6 +141,7 @@ module.exports = {
       // minChunks: 2
       minChunks: module => /node_modules/.test(module.resource)
     }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new CleanWebpackPlugin(resolveApp('build')),
     new CopyWebpackPlugin([
       {
@@ -163,28 +164,5 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty'
   },
-  // devServer: {
-  //   compress: true,
-  //   clientLogLevel: 'none',
-  //   host: HOST,
-  //   port: PORT,
-  //   contentBase: resolveApp('public'),
-  //   watchContentBase: true,
-  //   publicPath: '/',
-  //   noInfo: true,
-  //   open: true,
-  //   watchOptions: {
-  //     ignored: new RegExp(
-  //       `^(?!${path
-  //         .normalize(resolveApp('src/'))
-  //         .replace(/[\\]+/g, '\\\\')}).+[\\\\/]node_modules[\\\\/]`,
-  //       'g'
-  //     )
-  //   },
-  //   hot: true,
-  //   inline: true,
-  //   overlay: false,
-  //   historyApiFallback: true
-  // },
   bail: isPROD
 }
