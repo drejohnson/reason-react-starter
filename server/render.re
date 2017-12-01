@@ -29,8 +29,8 @@ let view = (html, styles, app_bundle, vendor_bundle) => {j|
         You need to enable JavaScript to run this app.
       </noscript>
       <div id="root">$(html)</div>
-      <script src=$(vendor_bundle)></script>
-      <script src=$(app_bundle)></script>
+      <script src=$(vendor_bundle) defer></script>
+      <script src=$(app_bundle) defer></script>
     </body>
   </html>
 |j};
