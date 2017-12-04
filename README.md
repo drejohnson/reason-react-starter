@@ -25,4 +25,5 @@
 * [ ] Better HMR
 * [ ] Optimized Webpack builds
 * [ ] Graphql client - [Reason-Apollo](https://github.com/Gregoirevda/reason-apollo) or [ReGql](https://github.com/kennetpostigo/regql) until official [Apollo Client and React Apollo binding](https://github.com/apollographql/react-apollo/blob/master/ROADMAP.md#reason) are released
-* [ ] Code splitting?
+* [ ] Code splitting - Not sure how to accomplish this yet.
+* [ ] Explore binding to another router [universal-router](https://www.kriasoft.com/universal-router/)?
