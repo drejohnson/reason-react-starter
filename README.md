@@ -27,3 +27,4 @@
 * [ ] Graphql client - [Reason-Apollo](https://github.com/Gregoirevda/reason-apollo) or [ReGql](https://github.com/kennetpostigo/regql) until official [Apollo Client and React Apollo binding](https://github.com/apollographql/react-apollo/blob/master/ROADMAP.md#reason) are released
 * [ ] Code splitting - Not sure how to accomplish this yet.
 * [ ] Explore binding to another router [universal-router](https://www.kriasoft.com/universal-router/)?
+* [ ] Use Javascript for express server - bs-express is missing a few things or just use [razzle](https://github.com/jaredpalmer/razzle).
