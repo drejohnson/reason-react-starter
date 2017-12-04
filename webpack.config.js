@@ -12,12 +12,12 @@ const webpack = require('webpack')
 
 const HOST = process.env.HOST || 'localhost'
 const PORT = process.env.PORT || 8080
-const localENV = `http://${HOST}:${PORT}/`
 const isPROD = process.env.NODE_ENV === 'production'
 const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
 
 module.exports = {
+  name: 'client',
   devtool: isPROD ? false : 'cheap-module-source-map',
   entry: {
     app: isPROD

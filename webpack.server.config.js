@@ -8,6 +8,7 @@ const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
 
 module.exports = {
+  name: 'server',
   target: 'node',
   node: {
     __dirname: false
@@ -31,6 +32,7 @@ module.exports = {
     ]
   },
   plugins: [
+    ...(isPROD ? [] : [new webpack.HotModuleReplacementPlugin()]),
     new webpack.DefinePlugin({
       APP_BUNDLE: JSON.stringify(
         isPROD
