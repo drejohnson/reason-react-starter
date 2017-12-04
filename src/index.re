@@ -11,6 +11,8 @@ module AppContainer = {
     ReasonReact.wrapJsForReason(~reactClass=appContainer, ~props=Js.Obj.empty(), children);
 };
 
+let text = ReasonReact.stringToElement;
+
 let rootId = Utils.getElementById(Utils.dom, "root");
 
 let renderer = FelaRenderer.renderer;
@@ -22,6 +24,18 @@ let app = () =>
       <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
         ...<BrowserRouter>
              <div>
+               <ReactHelmet>
+                 <meta charSet="utf-8" />
+                 <meta name="viewport" content="width=device-width, initial-scale=1" />
+                 <meta name="theme-color" content="#000000" />
+                 <link rel="manifest" href="/manifest.json" />
+                 <link rel="shortcut icon" href="/favicon.ico" />
+                 <title> (text("ReasonReact Starter")) </title>
+                 <meta
+                   name="description"
+                   content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems."
+                 />
+               </ReactHelmet>
                <Header />
                <Switch>
                  <Route path="/" exact=true component=(() => <Home />) />
@@ -37,6 +51,18 @@ let app = () =>
         <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
           ...<BrowserRouter>
                <div>
+                 <ReactHelmet>
+                   <meta charSet="utf-8" />
+                   <meta name="viewport" content="width=device-width, initial-scale=1" />
+                   <meta name="theme-color" content="#000000" />
+                   <link rel="manifest" href="/manifest.json" />
+                   <link rel="shortcut icon" href="/favicon.ico" />
+                   <title> (text("ReasonReact Starter")) </title>
+                   <meta
+                     name="description"
+                     content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems."
+                   />
+                 </ReactHelmet>
                  <Header />
                  <Switch>
                    <Route path="/" exact=true component=(() => <Home />) />

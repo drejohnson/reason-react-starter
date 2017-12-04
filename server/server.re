@@ -2,6 +2,8 @@ open Express;
 
 open ReactRouter;
 
+let text = ReasonReact.stringToElement;
+
 let app = express();
 
 if (! Utils.isPROD) {
@@ -27,6 +29,18 @@ let renderMiddleware =
             <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
               ...<ServerRouter context location>
                    <div>
+                     <ReactHelmet>
+                       <meta charSet="utf-8" />
+                       <meta name="viewport" content="width=device-width, initial-scale=1" />
+                       <meta name="theme-color" content="#000000" />
+                       <link rel="manifest" href="/manifest.json" />
+                       <link rel="shortcut icon" href="/favicon.ico" />
+                       <title> (text("ReasonReact Starter")) </title>
+                       <meta
+                         name="description"
+                         content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems."
+                       />
+                     </ReactHelmet>
                      <Header />
                      <Switch>
                        <Route path="/" exact=true component=(() => <Home />) />
@@ -39,7 +53,26 @@ let renderMiddleware =
           </Fela.Provider>
         );
       let styles = styleMarkup;
-      Response.sendString(res, Render.view(html, styles, app_bundle, vendor_bundle))
+      let helmet = ReactHelmet.renderStatic();
+      let helmetHtmlAttributes = helmet##htmlAttributes##toString();
+      let helmetTitle = helmet##title##toString();
+      let helmetMeta = helmet##meta##toString();
+      let helmetLink = helmet##link##toString();
+      let helmetScript = helmet##script##toString();
+      Response.sendString(
+        res,
+        Render.view(
+          html,
+          helmetHtmlAttributes,
+          helmetTitle,
+          helmetMeta,
+          helmetLink,
+          helmetScript,
+          styles,
+          app_bundle,
+          vendor_bundle
+        )
+      )
     }
   );
 
