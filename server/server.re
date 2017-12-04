@@ -15,7 +15,7 @@ if (! Utils.isPROD) {
 
 [@bs.val] external vendor_bundle : string = "VENDOR_BUNDLE";
 
-/* Same as with index.re, using contents of Root component as a work around to get routing to work client side. Issue is with context I believe */
+/* Same as with index.re, using contents of Root component as a work around to get routing to work client side. Issue is with context I believe. It's tedious nonetheless! */
 let renderMiddleware =
   Middleware.from(
     (_req, res, _next) => {
@@ -41,6 +41,7 @@ let renderMiddleware =
                          content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems."
                        />
                      </ReactHelmet>
+                     <Route path="/" component=(() => <LogView />) />
                      <Header />
                      <Switch>
                        <Route path="/" exact=true component=(() => <Home />) />

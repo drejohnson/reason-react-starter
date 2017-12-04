@@ -17,7 +17,9 @@ let rootId = Utils.getElementById(Utils.dom, "root");
 
 let renderer = FelaRenderer.renderer;
 
-/* Using contents of Root component as a work around to get routing to work client side. Issue is with context I believe */
+Utils.isBrowser ? ReactGA.initialize("UA-40660556-1") : ();
+
+/* Using contents of Root component as a work around to get routing to work client side. Issue is with context I believe. It's tedious nonetheless! */
 let app = () =>
   Utils.isPROD ?
     <Fela.Provider renderer>
@@ -36,6 +38,7 @@ let app = () =>
                    content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems."
                  />
                </ReactHelmet>
+               <Route path="/" component=(() => <LogView />) />
                <Header />
                <Switch>
                  <Route path="/" exact=true component=(() => <Home />) />
@@ -63,6 +66,7 @@ let app = () =>
                      content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems."
                    />
                  </ReactHelmet>
+                 <Route path="/" component=(() => <LogView />) />
                  <Header />
                  <Switch>
                    <Route path="/" exact=true component=(() => <Home />) />

@@ -1504,6 +1504,10 @@ find-up@^2.0.0, find-up@^2.1.0:
   dependencies:
     locate-path "^2.0.0"
 
+fontfaceobserver@^2.0.13:
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/fontfaceobserver/-/fontfaceobserver-2.0.13.tgz#47adbb343261eda98cb44db2152196ff124d3221"
+
 for-in@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -3252,6 +3256,12 @@ react-fela@^6.0.5, react-fela@^6.1.1:
     fela-bindings "^1.2.0"
     fela-dom "^7.0.0"
     prop-types "^15.5.8"
+
+react-ga@^2.3.5:
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.3.5.tgz#7c3d0c530b2bbe64ceb1faa79be340685aa84a9a"
+  dependencies:
+    object-assign "^4.1.1"
 
 react-helmet@^5.2.0:
   version "5.2.0"
