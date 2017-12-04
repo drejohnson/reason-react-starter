@@ -4,9 +4,15 @@ type element;
 
 type t;
 
+[@bs.scope ("window", "location")] [@bs.val] external pathname : string = "pathname";
+
 [@bs.val] external nodeEnv : string = "process.env.NODE_ENV";
 
+[@bs.val] external browserEnv : bool = "process.browser";
+
 let isPROD = nodeEnv === "production";
+
+let isBrowser = browserEnv;
 
 let dangerousHtml: string => Js.t('a) = (html) => {"__html": html};
 
