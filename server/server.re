@@ -4,9 +4,10 @@ open ReactRouter;
 
 let app = express();
 
-! Utils.isPROD ? App.use(app, Webpack.webpackDevMiddleware) : ();
-
-! Utils.isPROD ? App.use(app, Webpack.webpackHotMiddleware) : ();
+if (! Utils.isPROD) {
+  App.use(app, Webpack.webpackDevMiddleware);
+  App.use(app, Webpack.webpackHotMiddleware)
+};
 
 [@bs.val] external app_bundle : string = "APP_BUNDLE";
 
@@ -18,7 +19,7 @@ let renderMiddleware =
     (_req, res, _next) => {
       let renderer = FelaRenderer.renderer;
       let styleMarkup = Fela.renderToMarkup(renderer);
-      let context = Js_json.object_ @@ Js_dict.empty();
+      let context = Js.Json.object_(Js.Dict.empty());
       let location = Utils.geturl(_req);
       let html =
         ReactDOMServerRe.renderToString(
