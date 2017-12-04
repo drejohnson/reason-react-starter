@@ -1,5 +1,3 @@
-open Utils;
-
 let globalStyles = {j|
   /*!
   * Bootstrap Reboot v4.0.0-beta.2 (https://getbootstrap.com)
