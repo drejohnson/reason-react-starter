@@ -1,18 +1,20 @@
+type dom;
+
+type element;
+
+type t;
+
 [@bs.val] external nodeEnv : string = "process.env.NODE_ENV";
 
 let isPROD = nodeEnv === "production";
 
 let dangerousHtml: string => Js.t('a) = (html) => {"__html": html};
 
-type dom;
-
 [@bs.val] external dom : dom = "document";
 
-type element;
+[@bs.send] external getElementById : (dom, string) => element = "getElementById";
 
-[@bs.send] external get_by_id : (dom, string) => element = "getElementById";
-
-[@bs.send] external get_elements_by_classname : (dom, string) => array(element) =
+[@bs.send] external getElementsByClassname : (dom, string) => array(element) =
   "getElementsByClassName";
 
 [@bs.val] external hot : bool = "module.hot";

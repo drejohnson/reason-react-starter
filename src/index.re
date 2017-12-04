@@ -11,7 +11,7 @@ module AppContainer = {
     ReasonReact.wrapJsForReason(~reactClass=appContainer, ~props=Js.Obj.empty(), children);
 };
 
-let rootId = Utils.get_by_id(Utils.dom, "root");
+let rootId = Utils.getElementById(Utils.dom, "root");
 
 let renderer = FelaRenderer.renderer;
 
