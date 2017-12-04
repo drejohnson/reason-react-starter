@@ -20,14 +20,12 @@
   }],
   "sources": [{
       "dir": "src",
-      "subdirs": [
-        "components",
-        "pages",
-        "utils",
-        "bindings"
-      ]
+      "subdirs": true
     },
-    "server"
+    {
+      "dir": "server",
+      "subdirs": true
+    }
   ],
   "namespace": true,
   "suffix": ".bs.js",
