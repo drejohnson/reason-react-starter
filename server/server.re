@@ -15,7 +15,7 @@ if (! Utils.isPROD) {
 
 [@bs.val] external vendor_bundle : string = "VENDOR_BUNDLE";
 
-/* Same as with index.re, using contents of Root component as a work around to get routing to work client side. Issue is with context I believe. It's tedious nonetheless! */
+/* Using a plain function as the Root component as a work around to get routing to work client side. Issue is with context I believe. Not ideal but it works and is DRY */
 let renderMiddleware =
   Middleware.from(
     (_req, res, _next) => {
@@ -27,29 +27,7 @@ let renderMiddleware =
         ReactDOMServerRe.renderToString(
           <Fela.Provider renderer>
             <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
-              ...<ServerRouter context location>
-                   <div>
-                     <ReactHelmet>
-                       <meta charSet="utf-8" />
-                       <meta name="viewport" content="width=device-width, initial-scale=1" />
-                       <meta name="theme-color" content="#000000" />
-                       <link rel="manifest" href="/manifest.json" />
-                       <link rel="shortcut icon" href="/favicon.ico" />
-                       <title> (text("ReasonReact Starter")) </title>
-                       <meta
-                         name="description"
-                         content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems."
-                       />
-                     </ReactHelmet>
-                     <Route path="/" component=(() => <LogView />) />
-                     <Header />
-                     <Switch>
-                       <Route path="/" exact=true component=(() => <Home />) />
-                       <Route path="/about" exact=true component=(() => <About />) />
-                       <Route component=(() => <NotFound />) />
-                     </Switch>
-                   </div>
-                 </ServerRouter>
+              ...<ServerRouter context location> (Root.make()) </ServerRouter>
             </Fela.ThemeProvider>
           </Fela.Provider>
         );

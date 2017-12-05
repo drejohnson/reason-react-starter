@@ -19,62 +19,18 @@ let renderer = FelaRenderer.renderer;
 
 Utils.isBrowser ? ReactGA.initialize("UA-40660556-1") : ();
 
-/* Using contents of Root component as a work around to get routing to work client side. Issue is with context I believe. It's tedious nonetheless! */
+/* Using a plain function as the Root component as a work around to get routing to work client side. Issue is with context I believe. Not ideal but it works and is DRY */
 let app = () =>
   Utils.isPROD ?
     <Fela.Provider renderer>
       <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
-        ...<BrowserRouter>
-             <div>
-               <ReactHelmet>
-                 <meta charSet="utf-8" />
-                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                 <meta name="theme-color" content="#000000" />
-                 <link rel="manifest" href="/manifest.json" />
-                 <link rel="shortcut icon" href="/favicon.ico" />
-                 <title> (text("ReasonReact Starter")) </title>
-                 <meta
-                   name="description"
-                   content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems."
-                 />
-               </ReactHelmet>
-               <Route path="/" component=(() => <LogView />) />
-               <Header />
-               <Switch>
-                 <Route path="/" exact=true component=(() => <Home />) />
-                 <Route path="/about" exact=true component=(() => <About />) />
-                 <Route component=(() => <NotFound />) />
-               </Switch>
-             </div>
-           </BrowserRouter>
+        ...<BrowserRouter> (Root.make()) </BrowserRouter>
       </Fela.ThemeProvider>
     </Fela.Provider> :
     <AppContainer>
       <Fela.Provider renderer>
         <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
-          ...<BrowserRouter>
-               <div>
-                 <ReactHelmet>
-                   <meta charSet="utf-8" />
-                   <meta name="viewport" content="width=device-width, initial-scale=1" />
-                   <meta name="theme-color" content="#000000" />
-                   <link rel="manifest" href="/manifest.json" />
-                   <link rel="shortcut icon" href="/favicon.ico" />
-                   <title> (text("ReasonReact Starter")) </title>
-                   <meta
-                     name="description"
-                     content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems."
-                   />
-                 </ReactHelmet>
-                 <Route path="/" component=(() => <LogView />) />
-                 <Header />
-                 <Switch>
-                   <Route path="/" exact=true component=(() => <Home />) />
-                   <Route path="/about" exact=true component=(() => <About />) />
-                   <Route component=(() => <NotFound />) />
-                 </Switch>
-               </div>
-             </BrowserRouter>
+          ...<BrowserRouter> (Root.make()) </BrowserRouter>
         </Fela.ThemeProvider>
       </Fela.Provider>
     </AppContainer>;
