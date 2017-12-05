@@ -1,5 +1,7 @@
 open ReactRouter;
 
+Utils.isBrowser ? ReactGA.initialize("UA-40660556-1") : ();
+
 let text = ReasonReact.stringToElement;
 
 let renderHome = () => <Home />;
@@ -22,6 +24,7 @@ let make = () =>
         content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems."
       />
     </ReactHelmet>
+    <Route path="/" component=(() => <LogView />) />
     <Header />
     <Switch>
       <Route path="/" exact=true component=renderHome />

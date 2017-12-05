@@ -17,8 +17,6 @@ let rootId = Utils.getElementById(Utils.dom, "root");
 
 let renderer = FelaRenderer.renderer;
 
-Utils.isBrowser ? ReactGA.initialize("UA-40660556-1") : ();
-
 /* Using a plain function as the Root component as a work around to get routing to work client side. Issue is with context I believe. Not ideal but it works and is DRY */
 let app = () =>
   Utils.isPROD ?
