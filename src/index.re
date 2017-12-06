@@ -21,13 +21,13 @@ let renderer = FelaRenderer.renderer;
 let app = () =>
   Utils.isPROD ?
     <Fela.Provider renderer>
-      <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
+      <Fela.ThemeProvider theme=Theme.default>
         ...<BrowserRouter> (Root.make()) </BrowserRouter>
       </Fela.ThemeProvider>
     </Fela.Provider> :
     <AppContainer>
       <Fela.Provider renderer>
-        <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
+        <Fela.ThemeProvider theme=Theme.default>
           ...<BrowserRouter> (Root.make()) </BrowserRouter>
         </Fela.ThemeProvider>
       </Fela.Provider>

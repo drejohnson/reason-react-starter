@@ -1,16 +1,9 @@
-[@bs.module "utils/fonts"] external fonts : unit => unit = "default";
+let rule = (props) => {"backgroundColor": props##theme##page##backgroundColor};
 
-let component = ReasonReact.statelessComponent("Page");
-
-let make = (~style=?, children) => {
-  ...component,
-  didMount: (_self) => {
-    fonts();
-    ReasonReact.NoUpdate
-  },
-  render: (_self) =>
-    <View ?style>
-      <Header />
-      (ReasonReact.createDomElement("div", ~props=Js.Obj.empty(), children))
-    </View>
-};
+let make = (children) =>
+  ReactFela.createComponent(
+    ~rule,
+    ~baseElement=`String("section"),
+    ~props=Js.Obj.empty(),
+    children
+  );

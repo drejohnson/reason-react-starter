@@ -26,7 +26,7 @@ let renderMiddleware =
       let html =
         ReactDOMServerRe.renderToString(
           <Fela.Provider renderer>
-            <Fela.ThemeProvider theme={"color": "blue", "fontSize": "15px"}>
+            <Fela.ThemeProvider theme=Theme.default>
               ...<ServerRouter context location> (Root.make()) </ServerRouter>
             </Fela.ThemeProvider>
           </Fela.Provider>
