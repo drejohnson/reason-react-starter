@@ -6,7 +6,6 @@ let make = (~message, _children) => {
   ...component,
   render: (_self) =>
     <View>
-      <ThemedText> "I am blue and 15px sized" </ThemedText>
       <Image
         source="https://fakeimg.pl/1600x350/?retina=true"
         resizeMode=Cover
@@ -14,18 +13,6 @@ let make = (~message, _children) => {
         height=(PX(350))
         backgroundColor="#ccc"
       />
-      <Text
-        _as="h2"
-        style=(
-          ReactDOMRe.Style.make(
-            ~color="#db4d3f",
-            ~backgroundColor="#eee",
-            ~padding="20px 10px",
-            ~margin="0",
-            ()
-          )
-        )>
-        (text(message))
-      </Text>
+      <Text _as="h2"> (text(message)) </Text>
     </View>
 };
