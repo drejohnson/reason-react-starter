@@ -31,7 +31,7 @@ let size = (size) =>
   | AUTO => "auto"
   };
 
-let make = (~source, ~width, ~height, ~resizeMode, ~backgroundColor, _children) => {
+let make = (~source, ~width, ~height, ~resizeMode, ~backgroundColor=?, _children) => {
   ...component,
   initialState: (_) => {isReady: false},
   reducer: ((), _state) => ReasonReact.NoUpdate,
@@ -50,7 +50,6 @@ let make = (~source, ~width, ~height, ~resizeMode, ~backgroundColor, _children) 
             },
           ~backgroundRepeat="no-repeat",
           ~backgroundPosition="50% 50%",
-          ~backgroundColor,
           ~backgroundImage=state.isReady ? "url(" ++ (source ++ ")") : "",
           /* TODO: FIX ROUND */
           /* ~borderRadius=round ? string_of_int(min(width, height)) ++ "px" : "0px", */
