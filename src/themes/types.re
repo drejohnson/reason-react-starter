@@ -71,6 +71,7 @@ type zero = cssunit;
 type theme = {
   .
   "color": color,
+  "fontSize": cssunit,
   "backgroundColor": color,
   "page": {. "backgroundColor": color},
   "header": {. "backgroundColor": color}
