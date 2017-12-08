@@ -1,3 +1,5 @@
+open ThemeHelpers;
+
 let text = ReasonReact.stringToElement;
 
 let component = ReasonReact.statelessComponent("Hello");
@@ -13,6 +15,11 @@ let make = (~message, _children) => {
         height=(PX(350))
         backgroundColor="#ccc"
       />
-      <Text _as="h2"> (text(message)) </Text>
+      <WithTheme>
+        (
+          (theme) =>
+            <Text _as="h2" fontSize=theme##fontSize color=theme##color> (text(message)) </Text>
+        )
+      </WithTheme>
     </View>
 };
