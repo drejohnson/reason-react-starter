@@ -1,10 +1,8 @@
 /*
    ** adapted from the excellent bs-css repo: https://github.com/SentiaAnalytics/bs-css/blob/master/src/Css.rei
-   ** Removed the Glamor parts since I just want the css typings for types theming
+   ** Removed the Glamor parts since I just want the css typings for typed styles
  */
 type css = string;
-
-type rule;
 
 type color;
 
