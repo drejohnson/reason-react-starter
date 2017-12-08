@@ -4,5 +4,5 @@ let component = ReasonReact.statelessComponent("NotFound");
 
 let make = (_children) => {
   ...component,
-  render: (_self) => <View> <Hello message="Sorry page not found" /> </View>
+  render: (_self) => <div> <Hello message="Sorry page not found" /> </div>
 };

@@ -5,7 +5,7 @@ let component = ReasonReact.statelessComponent("Home");
 let make = (_children) => {
   ...component,
   render: (_self) =>
-    <View>
+    <div>
       <ReactHelmet>
         <title> (text("ReasonReact Starter")) </title>
         <meta
@@ -14,5 +14,5 @@ let make = (_children) => {
         />
       </ReactHelmet>
       <Hello message="Hello from home component" />
-    </View>
+    </div>
 };
