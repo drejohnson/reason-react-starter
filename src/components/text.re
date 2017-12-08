@@ -1,18 +1,13 @@
-/* https://github.com/bloodyowl/reReactPrimitives/blob/master/src/text.re */
-let component = ReasonReact.statelessComponent("Text");
+let rule = (props) => {"fontSize": props##fontSize, "color": props##color};
 
-let make = (~style=?, ~_as=?, children) => {
-  ...component,
-  render: (_self) => {
-    let elementAs = (_as) =>
-      switch _as {
-      | Some(string) => string
-      | None => "p"
-      };
-    ReasonReact.createDomElement(
-      elementAs(_as),
-      ~props={"style": Js.Nullable.from_opt(style)},
-      children
-    )
-  }
-};
+let make = (~_as, ~fontSize=?, ~color=?, children) =>
+  ReactFela.createComponent(
+    ~rule,
+    ~baseElement=`String({j|$(_as)|j}),
+    ~props={
+      "_as": _as,
+      "fontSize": Js.Nullable.from_opt(fontSize),
+      "color": Js.Nullable.from_opt(color)
+    },
+    children
+  );
