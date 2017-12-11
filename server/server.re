@@ -2,8 +2,6 @@ open Express;
 
 open ReactRouter;
 
-let text = ReasonReact.stringToElement;
-
 let app = express();
 
 if (! Utils.isPROD) {
@@ -26,9 +24,9 @@ let renderMiddleware =
       let html =
         ReactDOMServerRe.renderToString(
           <Fela.Provider renderer>
-            <Fela.ThemeProvider theme=Theme.default>
+            <ReactFela.ThemeProvider theme=(Theme.default())>
               ...<ServerRouter context location> (Root.make()) </ServerRouter>
-            </Fela.ThemeProvider>
+            </ReactFela.ThemeProvider>
           </Fela.Provider>
         );
       let styles = styleMarkup;

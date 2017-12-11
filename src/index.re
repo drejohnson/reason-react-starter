@@ -11,8 +11,6 @@ module AppContainer = {
     ReasonReact.wrapJsForReason(~reactClass=appContainer, ~props=Js.Obj.empty(), children);
 };
 
-let text = ReasonReact.stringToElement;
-
 let rootId = Utils.getElementById(Utils.dom, "root");
 
 let renderer = FelaRenderer.renderer;
@@ -21,15 +19,15 @@ let renderer = FelaRenderer.renderer;
 let app = () =>
   Utils.isPROD ?
     <Fela.Provider renderer>
-      <Fela.ThemeProvider theme=Theme.default>
+      <ReactFela.ThemeProvider theme=(Theme.default())>
         ...<BrowserRouter> (Root.make()) </BrowserRouter>
-      </Fela.ThemeProvider>
+      </ReactFela.ThemeProvider>
     </Fela.Provider> :
     <AppContainer>
       <Fela.Provider renderer>
-        <Fela.ThemeProvider theme=Theme.default>
+        <ReactFela.ThemeProvider theme=(Theme.default())>
           ...<BrowserRouter> (Root.make()) </BrowserRouter>
-        </Fela.ThemeProvider>
+        </ReactFela.ThemeProvider>
       </Fela.Provider>
     </AppContainer>;
 
