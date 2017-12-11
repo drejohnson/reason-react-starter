@@ -16,6 +16,8 @@ let isBrowser = browserEnv;
 
 let dangerousHtml: string => Js.t('a) = (html) => {"__html": html};
 
+let text = ReasonReact.stringToElement;
+
 [@bs.val] external dom : dom = "document";
 
 [@bs.send] external getElementById : (dom, string) => element = "getElementById";
