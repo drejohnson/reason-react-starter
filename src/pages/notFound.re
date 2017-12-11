@@ -1,5 +1,3 @@
-let text = ReasonReact.stringToElement;
-
 let component = ReasonReact.statelessComponent("NotFound");
 
 let make = (_children) => {
