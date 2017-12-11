@@ -8,7 +8,6 @@ external devMiddleware : (compiler, {. "noInfo": bool, "serverSideRender": bool}
 
 [@bs.module] external hotMiddleware : compiler => 'a = "webpack-hot-middleware";
 
-/* TODO: fix */
 [@bs.module] external config : Js.Json.t = "../../../webpack.config";
 
 let config = config;
