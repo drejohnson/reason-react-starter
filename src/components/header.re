@@ -8,12 +8,12 @@ let make = (_children) => {
   render: (_self) =>
     <header>
       <Image
-        backgroundImage=(Css.backgroundImage("/images/logo.svg"))
+        backgroundImage="/images/logo.svg"
         width=(Css.px(100))
         height=(Css.px(100))
-        backgroundSize=(Css.backgroundSize(Cover))
-        backgroundPosition=(Css.backgroundPosition(Center))
-        backgroundRepeat=(Css.backgroundRepeat(NoRepeat))
+        backgroundSize=Cover
+        backgroundPosition=Center
+        backgroundRepeat=NoRepeat
       />
       <Navigation />
     </header>
